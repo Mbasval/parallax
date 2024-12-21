@@ -1,4 +1,5 @@
 let img1, img2, img3; // Images
+let canvasHeight = 3000; // Total virtual canvas height for scrolling
 
 function preload() {
   // Load your images from the public folder
@@ -10,32 +11,31 @@ function preload() {
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('p5-canvas');
-  noLoop(); // No continuous draw loop is needed for this effect
+  noLoop(); // No need for continuous drawing; redraw only on scroll
 }
 
 function draw() {
-  clear();
-  let scrollY = window.scrollY; // Get the current scroll position
+  clear(); // Clear the canvas
 
-  // Background layer (slowest movement)
-  let y1 = scrollY * 0.2;
-  image(img1, 0, -height + y1, width, height);
+  let scrollY = window.scrollY; // Current scroll position
 
-  // Middle layer (medium movement)
-  let y2 = scrollY * 0.5;
-  image(img2, 0, -height + y2, width, height);
+  // Calculate parallax offsets for each image layer
+  let offset1 = scrollY * 0.2; // Slowest
+  let offset2 = scrollY * 0.5; // Medium
+  let offset3 = scrollY * 0.8; // Fastest
 
-  // Foreground layer (fastest movement)
-  let y3 = scrollY * 0.8;
-  image(img3, 0, -height + y3, width, height);
+  // Draw images with scaling
+  image(img1, 0, -height + offset1, width, height); // Background
+  image(img2, 0, -height + offset2, width, height); // Middle ground
+  image(img3, 0, -height + offset3, width, height); // Foreground
 }
 
-// Redraw the canvas on window scroll
+// Trigger redraw on scroll
 window.addEventListener('scroll', () => {
   redraw();
 });
 
-// Ensure canvas resizes properly
+// Adjust canvas size when the window is resized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
