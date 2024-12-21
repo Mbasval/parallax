@@ -6,10 +6,23 @@
     <title>Parallax Effect</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="sketch.js" defer></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        height: 300vh; /* Make the page scrollable */
+        background: #111;
+      }
+      canvas {
+        display: block;
+        position: fixed; /* Keeps canvas fixed while scrolling */
+        top: 0;
+        left: 0;
+      }
+    </style>
   </head>
   <body>
-    <main>
-      <div id="p5-canvas"></div>
-    </main>
+    <div id="p5-canvas"></div>
   </body>
 </html>
