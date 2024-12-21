@@ -2,9 +2,9 @@ let img1, img2, img3;
 
 function preload() {
   // Load your images
-  img1 = loadImage('img1.jpg');
-  img2 = loadImage('img2.jpg');
-  img3 = loadImage('img3.jpg');
+  img1 = loadImage('img1.png');
+  img2 = loadImage('img2.png');
+  img3 = loadImage('img3.png');
 }
 
 function setup() {
