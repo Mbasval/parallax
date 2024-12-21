@@ -1,31 +1,41 @@
-let img1, img2, img3;
+let img1, img2, img3; // Images
 
 function preload() {
-  // Load your images
-  img1 = loadImage('img1.png');
-  img2 = loadImage('img2.png');
-  img3 = loadImage('img3.png');
+  // Load your images from the public folder
+  img1 = loadImage('img1.jpg');
+  img2 = loadImage('img2.jpg');
+  img3 = loadImage('img3.jpg');
 }
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('p5-canvas');
+  noLoop(); // No continuous draw loop is needed for this effect
 }
 
 function draw() {
-  // Calculate parallax effect based on scroll position
-  let scrollY = window.scrollY;
+  clear();
+  let scrollY = window.scrollY; // Get the current scroll position
 
-  // Draw background image (slow movement)
-  image(img1, 0, scrollY * 0.2, width, height);
+  // Background layer (slowest movement)
+  let y1 = scrollY * 0.2;
+  image(img1, 0, -height + y1, width, height);
 
-  // Draw middle image (medium movement)
-  image(img2, 0, scrollY * 0.5, width, height);
+  // Middle layer (medium movement)
+  let y2 = scrollY * 0.5;
+  image(img2, 0, -height + y2, width, height);
 
-  // Draw foreground image (fast movement)
-  image(img3, 0, scrollY * 0.8, width, height);
+  // Foreground layer (fastest movement)
+  let y3 = scrollY * 0.8;
+  image(img3, 0, -height + y3, width, height);
 }
 
+// Redraw the canvas on window scroll
+window.addEventListener('scroll', () => {
+  redraw();
+});
+
+// Ensure canvas resizes properly
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
